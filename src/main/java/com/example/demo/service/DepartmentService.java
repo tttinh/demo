@@ -5,18 +5,20 @@ import com.example.demo.domain.request.DepartmentCreateRequest;
 import com.example.demo.domain.request.DepartmentUpdateRequest;
 import com.example.demo.domain.response.DepartmentResponse;
 import com.example.demo.domain.response.DepartmentResponseAsPage;
+import com.example.demo.domain.response.DoctorResponseAsPage;
 import com.example.demo.repository.DepartmentRepository;
-
+import com.example.demo.repository.DoctorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class DepartmentService {
     
     private final DepartmentRepository departmentRepository;
+    private final DoctorRepository doctorRepository;
+
 
     public DepartmentResponse getOne(Long id) {
         return departmentRepository.findById(id)
@@ -64,5 +66,11 @@ public class DepartmentService {
     public void deleteDepartment(Long id) {
         departmentRepository.findById(id)
             .ifPresent(departmentRepository::delete);
+    }
+
+    public DoctorResponseAsPage getDoctors(Long departmentId, int page, int size) {
+        var pageable = PageRequest.of(page, size);
+        var doctorPage =  doctorRepository.findByDepartmentId(departmentId, pageable);
+        return DoctorResponseAsPage.of(doctorPage);
     }
 }

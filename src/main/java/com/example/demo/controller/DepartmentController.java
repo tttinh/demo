@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.common.ErrorCode;
 import com.example.demo.domain.request.DepartmentCreateRequest;
 import com.example.demo.domain.request.DepartmentUpdateRequest;
 import com.example.demo.domain.response.DepartmentResponse;
 import com.example.demo.domain.response.DepartmentResponseAsPage;
-import com.example.demo.exception.BadRequestException;
+import com.example.demo.domain.response.DoctorResponseAsPage;
 import com.example.demo.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -44,4 +43,12 @@ public class DepartmentController {
 		departmentService.deleteDepartment(id);
 	}
 
+	@GetMapping("/departments/{id}/doctors")
+	public DoctorResponseAsPage getDoctors(
+		@PathVariable Long id,
+		@RequestParam(defaultValue = "0") int page,
+		@RequestParam(defaultValue = "10") int size
+	) {
+		return departmentService.getDoctors(id, page, size);
+	}
 }
