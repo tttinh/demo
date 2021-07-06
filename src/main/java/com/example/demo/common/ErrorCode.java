@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
-    INVALID_ID("Your request id is not valid!"),
-    INVALID_DEPARTMENT_ID("The department ID is not valid!"),
-    INVALID_DOCTOR_ID("The doctor ID is not valid!"),
+    BAD_REQUEST("Your request is too bad :)!"),
+    EXISTED_ACCOUNT("This account already existed!"),
+    INVALID_EMAIL_PASSWORD("Invalid email or password!"),
+    INVALID_DEPARTMENT_ID("Invalid department ID!"),
+    INVALID_DOCTOR_ID("Invalid doctor ID!"),
     SERVER_ERROR("Internal Server Error!");
 
     private final String message;

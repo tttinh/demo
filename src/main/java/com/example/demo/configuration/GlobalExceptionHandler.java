@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.configuration;
 
 import com.example.demo.common.ErrorCode;
 import com.example.demo.domain.response.ErrorResponse;
